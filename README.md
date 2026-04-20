@@ -9,9 +9,9 @@ Image tampering detection using semantic segmentation to identify copy-move and 
 5. Designed for image forensics applications
 
 # Model Overview
-- Architecture: SegFormer-B2 (Semantic Segmentation Transformer)  
-- Task: Binary image tampering detection  
-- Output: Pixel-level tampering mask
+1. Architecture: SegFormer-B2 (Semantic Segmentation Transformer)
+2. Task: Binary image tampering detection  
+3. Output: Pixel-level tampering mask
 - Note: Model weights are not included in this repository due to file size limitations.
   
 # Project Structure
