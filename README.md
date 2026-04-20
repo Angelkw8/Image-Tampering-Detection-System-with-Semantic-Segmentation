@@ -42,6 +42,6 @@ Download trained model here:
 https://www.kaggle.com/datasets/tuesdayblue/segformer-b2-weights
 
 # Future Improvements
-1.Improve cross-dataset generalization
+1. Improve cross-dataset generalization
 2. Enhance detection accuracy on unseen data
 3. Optimize model performance
