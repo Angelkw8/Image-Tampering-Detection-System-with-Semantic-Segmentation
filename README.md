@@ -1,4 +1,4 @@
-# Image-Tampering-Detection-System-with-Semantic-Segmentation
+# Image-Tampering-Detection-System
 Image tampering detection using semantic segmentation to identify copy-move and splicing manipulations. Trained on the DEFACTO dataset with SegFormer-B2 for image forensics applications. Ongoing work focuses on improving cross-dataset generalization and detection accuracy.
 
 # Features
