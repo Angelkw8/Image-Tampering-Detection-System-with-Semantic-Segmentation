@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block title %}Image Upload{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-above" style="min-height: 90vh;">
+  <div class="col-md-8">
+    <div class="card upload-card shadow-sm">
+      <div class="card-body">
+
+        <h5 class="text-center mb-4 text-muted">
+          <i class="fa fa-upload"></i> Upload Image
+        </h5>
+
+        <form id="uploadForm"
+              action="{{ url_for('views.upload_image') }}"
+              method="POST"
+              enctype="multipart/form-data">
+
+          <small class="text-muted d-block text-center mb-3">
+            Only JPG and PNG files are accepted.
+          </small>
+
+          <!-- Upload Row -->
+          <div class="mb-3">
+            <div class="d-flex align-items-center justify-content-center">
+
+              <input type="file"
+                     id="imageInput"
+                     name="image"
+                     accept="image/png, image/jpeg"
+                     hidden
+                     required>
+
+              <label for="imageInput" class="btn btn-dark mb-0">
+                <i class="fa fa-image"></i> Choose Image
+              </label>
+
+              <span id="fileName" class="ml-3 text-muted">
+                No file selected
+              </span>
+
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="progress mb-4 d-none" style="height:18px;" id="progressBox">
+            <div class="progress-bar bg-dark" id="progressBar" style="width:0%">
+              0%
+            </div>
+          </div>
+
+          <!-- Isolated Detect Button -->
+          <div class="text-center pt-3 border-top">
+            <button type="submit" class="btn btn-dark px-5">
+              Analyze Image
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if file_url %}
+<!-- Result Modal -->
+<div class="modal fade" id="resultModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0 shadow">
+
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title">
+          {{ 'Tampering Detected' if tampered else 'Image Authentic' }}
+        </h5>
+        <button type="button" class="close text-white" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="alert {{ 'alert-danger' if tampered else 'alert-success' }} text-center">
+          <strong>
+            {{ 'TAMPERED IMAGE DETECTED' if tampered else 'NO TAMPERING FOUND' }}
+          </strong>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 text-center mb-3">
+            <h6 class="text-muted">Original Image</h6>
+            <img src="{{ file_url }}" class="img-fluid rounded shadow-sm">
+          </div>
+
+          <div class="col-md-6 text-center mb-3">
+            <h6 class="text-muted">Detected Regions</h6>
+            <img src="{{ overlay_url }}" class="img-fluid rounded shadow-sm">
+          </div>
+        </div>
+
+        <div class="text-center mt-3">
+          <a href="{{ url_for('views.download_report') }}" class="btn btn-dark mr-2">
+            <i class="fa fa-file-pdf"></i> Download Report
+          </a>
+
+          <a href="{{ overlay_url }}" download class="btn btn-outline-secondary">
+            <i class="fa fa-image"></i> Download Overlay Image
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block javascript %}
+<script>
+/* Show selected file name */
+const imageInput = document.getElementById("imageInput");
+const fileName = document.getElementById("fileName");
+
+if (imageInput) {
+  imageInput.addEventListener("change", function () {
+    fileName.textContent = this.files.length
+      ? this.files[0].name
+      : "No file selected";
+  });
+}
+
+/* Fake progress bar */
+const form = document.getElementById("uploadForm");
+const progressBox = document.getElementById("progressBox");
+const progressBar = document.getElementById("progressBar");
+
+if (form) {
+  form.addEventListener("submit", () => {
+    progressBox.classList.remove("d-none");
+    let percent = 0;
+
+    const timer = setInterval(() => {
+      percent += 5;
+      progressBar.style.width = percent + "%";
+      progressBar.innerText = percent + "%";
+      if (percent >= 100) clearInterval(timer);
+    }, 150);
+  });
+}
+</script>
+
+{% if file_url %}
+<script>
+$(document).ready(function () {
+  const modal = $('#resultModal');
+  modal.modal('show');
+
+  modal.on('hidden.bs.modal', function () {
+    fetch('/cleanup-temp', { method: 'POST' })
+      .finally(() => {
+        window.location.href = "{{ url_for('views.image_page') }}";
+      });
+  });
+});
+
+window.addEventListener('beforeunload', function () {
+  navigator.sendBeacon('/cleanup-temp');
+});
+</script>
+{% endif %}
+{% endblock %}

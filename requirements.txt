@@ -1,0 +1,11 @@
+flask
+flask-login
+flask-sqlalchemy
+torch
+torchvision
+transformers
+accelerate
+numpy
+pillow
+opencv-python
+reportlab

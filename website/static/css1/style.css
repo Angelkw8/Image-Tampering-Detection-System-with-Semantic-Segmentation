@@ -1,0 +1,145 @@
+/* =========================
+   GLOBAL
+========================= */
+body {
+    background-color: #0f172a;
+    color: #e5e7eb;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+    background-color: #020617;
+    border-bottom: 1px solid #1f2933;
+    padding: 0.8rem 1rem;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #e5e7eb !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #3b82f6 !important;
+}
+
+/* Toggler icon */
+.navbar-toggler {
+    border-color: #1f2933;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(229,231,235,0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* =========================
+   DEFAULT CARDS (NORMAL PAGES)
+========================= */
+.card {
+    background-color: #111827;
+    border: 1px solid #1f2933;
+    border-radius: 12px;
+}
+
+/* =========================
+   LOGIN & SIGNUP (GLASS STYLE)
+========================= */
+.login-wrapper {
+    min-height: 90vh;
+    background: linear-gradient(135deg, #020617, #0f172a);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(17, 24, 39, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+}
+
+/* =========================
+   PAGE TITLES
+========================= */
+.page-title {
+    color: #3b82f6;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* =========================
+   INPUTS
+========================= */
+.form-control {
+    background-color: #020617 !important;
+    color: #e5e7eb !important;
+    border: 1px solid #1f2933;
+}
+
+.form-control:focus {
+    background-color: #020617;
+    color: #ffffff;
+    border-color: #3b82f6;
+    box-shadow: none;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn-dark {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+    border-radius: 8px;
+}
+
+.btn-dark:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+/* =========================
+   ALERTS
+========================= */
+.alert {
+    background-color: #020617;
+    border: 1px solid #1f2933;
+    color: #e5e7eb;
+}
+
+/* =========================
+   LINKS
+========================= */
+a {
+    color: #3b82f6;
+}
+
+a:hover {
+    color: #60a5fa;
+}
+
+/* ===== CUSTOM FILE UPLOAD ===== */
+.file-name {
+    color: #6b7280;          /* darker gray */
+    font-size: 0.9rem;
+    word-break: break-all;
+}
+
+.custom-upload label {
+    cursor: pointer;
+}
+
+.upload-card {
+    background: rgba(17, 24, 39, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+}
+
+
+
+
+
